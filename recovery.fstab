@@ -21,8 +21,8 @@ none                      swap     /dev/block/zram0                             
 /optee                    emmc     /dev/block/platform/mstar_mci.0/by-name/optee             flags=display=optee;backup=1
 /armfw                    emmc     /dev/block/platform/mstar_mci.0/by-name/armfw             flags=display=armfw;backup=1
 auto                      auto     /devices/platform/ms_sdmmc*                               flags=display=auto
-/sdcard                   vfat     /dev/block/mmcblk1p1                                      flags=display=sdcard
-/udisk                    vfat     /dev/block/sda                                            flags=display=udisk
+/sdcard                   vfat     /data/media                                               flags=display="Micro SDcard";storage;wipeingui;removable
+/usb-otg                  auto     /dev/block/sda1  /dev/block/sda                           flags=display="USB OTG";storage;wipeingui;removable
 /udisk                    vfat     /devices/Mstar-xhci*                                      flags=display=udisk
 /vbmeta                   emmc     /dev/block/platform/mstar_mci.0/by-name/vbmeta            flags=display=vbmeta;backup=1;flashimg=1
 /param                    ext4     /dev/block/platform/mstar_mci.0/by-name/param             flags=display=param;backup=1

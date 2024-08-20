@@ -1,0 +1,56 @@
+on init
+    mkdir /data/property
+    # sdcard/usb mount points
+    mkdir /mnt
+    mkdir /mnt/sdcard
+    mkdir /mnt/usb
+    mkdir /mnt/usb/sda1
+    mkdir /mnt/usb/mmcblka1
+    mkdir /storage
+
+on early-fs
+    write /proc/sys/kernel/printk 7
+    setprop sys.usb.configfs 1
+
+on fs
+    mkdir /tvconfig
+    symlink /tvconfig/config /config
+    mount ext4 /dev/block/platform/mstar_mci.0/by-name/tvconfig /vendor/tvconfig wait noatime block_validity nodiscard data=ordered journal_checksum
+
+    # restore security contexts here to label those device nodes created by utopia
+    restorecon /dev/gflip
+    restorecon /dev/msmailbox
+    restorecon /dev/system
+
+on property:sys.usb.config=fastboot
+    write /sys/devices/Mstar-otg/software_id 1
+
+# Set watchdog timer to 30 seconds and pet it every 10 seconds to get a 20 second margin
+#service watchdogd /sbin/watchdogd 10 20
+#    class core
+
+on post-fs
+    # start console service earlier here
+    start console
+
+on boot
+    start socket_vsock_proxy
+
+on property:ro.debuggable=1
+    start console
+
+service console /system/bin/sh
+    class core
+    console
+    disabled
+    user root
+    group shell log readproc
+    seclabel u:r:shell:s0
+    setenv HOSTNAME console
+
+# turn on uart console for userbuild
+on property:ro.debuggable=0
+    # Give writes to anyone for the trace folder on debug builds.
+    # The folder is used to store method traces.
+    chmod 0773 /data/misc/trace
+    start console

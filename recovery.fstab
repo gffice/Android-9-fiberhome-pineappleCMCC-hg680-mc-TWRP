@@ -4,9 +4,9 @@
 /vendor_image             emmc     /dev/block/platform/mstar_mci.0/by-name/vendor            flags=display="vendor image";backup=1;flashimg=1
 /data                     ext4     /dev/block/platform/mstar_mci.0/by-name/userdata          flags=display=data;backup=1;flashimg=1
 /cache                    ext4     /dev/block/platform/mstar_mci.0/by-name/cache             flags=display=cache
-/mnt/vendor/tvservice     ext4     /dev/block/platform/mstar_mci.0/by-name/tvservice         flags=display=tvservice;backup=1;flashimg=1
-/vendor/tvconfig          ext4     /dev/block/platform/mstar_mci.0/by-name/tvconfig          flags=display=tvconfig;backup=1;flashimg=1
-/vendor/tvcertificate     ext4     /dev/block/platform/mstar_mci.0/by-name/tvcertificate     flags=display=tvcertificate;backup=1;flashimg=1
+/mnt/vendor/tvservice     ext4     /dev/block/by-name/tvservice                              flags=display=tvservice;backup=1;flashimg=1
+/vendor/tvconfig          ext4     /dev/block/by-name/tvconfig                               flags=display=tvconfig;backup=1;flashimg=1
+/vendor/tvcertificate     ext4     /dev/block/by-name/tvcertificate                          flags=display=tvcertificate;backup=1;flashimg=1
 /boot1                    emmc     /dev/block/mmcblk0boot0                                   flags=display=boot1;backup=1
 /boot2                    emmc     /dev/block/mmcblk0boot1                                   flags=display=boot2;backup=1
 none                      swap     /dev/block/zram0                                          flags=display=none
@@ -21,7 +21,6 @@ none                      swap     /dev/block/zram0                             
 /optee                    emmc     /dev/block/platform/mstar_mci.0/by-name/optee             flags=display=optee;backup=1
 /armfw                    emmc     /dev/block/platform/mstar_mci.0/by-name/armfw             flags=display=armfw;backup=1
 auto                      auto     /devices/platform/ms_sdmmc*                               flags=display=auto
-/sdcard                   vfat     /data/media                                               flags=display="Micro SDcard";storage;wipeingui;removable
 /usb-otg                  auto     /dev/block/sda1  /dev/block/sda                           flags=display="USB OTG";storage;wipeingui;removable
 /udisk                    vfat     /devices/Mstar-xhci*                                      flags=display=udisk
 /vbmeta                   emmc     /dev/block/platform/mstar_mci.0/by-name/vbmeta            flags=display=vbmeta;backup=1;flashimg=1
